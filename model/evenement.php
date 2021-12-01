@@ -4,12 +4,18 @@
         private $id;
         public $titre;
         public $description;
+		private $img;
+		private $auteur;
+		private $date_ajout;
+
     
 
-        function __construct($id, $titre, $description){
+        function __construct($id, $titre, $description, $img , $auteur){
 			$this->id=$id;
 			$this->titre=$titre;
 			$this->description=$description;
+			$this->img=$img;
+			$this->auteur =$auteur;
 		}
 
         function setid(string $id){
@@ -31,6 +37,16 @@
         function getdescription(){
 			return $this->description;
 		}
+		function getimg(){
+			return $this->img;
+		}
+		function getauteur(){
+			return $this->auteur;
+		}
+		function getdate_ajout(){
+			return $this->date_ajout;
+		}
+
         
     }
     
