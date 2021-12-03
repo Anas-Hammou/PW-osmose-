@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,22 +10,23 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Charts</title>
+    <title>SB Admin 2 - Tables</title>
 
-    <!-- Custom fonts for this template-->
+    <!-- Custom fonts for this template -->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template-->
+    <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
-
-    <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -42,7 +44,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -104,34 +106,37 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Pages article</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
+                        <h6 class="collapse-header">page</h6>
+                        <a class="collapse-item" href="article.html">article</a>
+                        <a class="collapse-item" href="afficherfrontcategorie.php">categorie</a>
+                        <a class="collapse-item" href="ai.html">ai</a>
+                        <a class="collapse-item" href="ml.html">ml</a>
+                        <a class="collapse-item" href="cs.html">cs</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item active">
-                <a class="nav-link" href="charts.php">
+            <li class="nav-item">
+                <a class="nav-link" href="charts.html">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
+                    <span>Charts article</span></a>
             </li>
-
+ <!-- Nav Item - Tables -->
+ <li class="nav-item">
+    <a class="nav-link" href="../view/affichercategorie.php">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Tables categorie</span></a>
+</li>
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="afficherarticle.php">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Tables article</span></a>
             </li>
 
             <!-- Divider -->
@@ -140,6 +145,13 @@
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+            <!-- Sidebar Message -->
+            <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
+                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
             </div>
 
         </ul>
@@ -353,11 +365,16 @@
                     </ul>
 
                 </nav>
+            
+        
                 <!-- End of Topbar -->
+                
+
+
 
                 <!-- Begin Page Content -->
                 <?php
-  $con = mysqli_connect("localhost","root","","crud");
+  $con = mysqli_connect("localhost","root","","article");
   
 ?>
 <html>
@@ -370,18 +387,18 @@
       function drawChart() {
 
         var data = google.visualization.arrayToDataTable([
-          ['titre', 'participants'],
+          ['nomcategorie', 'nbrearticle'],
          <?php
-         $sql = "SELECT * FROM article";
+         $sql = "SELECT * FROM categorie";
          $fire = mysqli_query($con,$sql);
           while ($result = mysqli_fetch_assoc($fire)) {
-            echo"['".$result['titre']."',".$result['id']."],";
+            echo"['".$result['nomcategorie']."',".$result['nbrearticle']."],";
           }
 
          ?>
         ]);
         var options = {
-          title: 'statistiques des participants'
+          title: 'statistiques des nombres des articles dans chaque catégories'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
