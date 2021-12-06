@@ -1,9 +1,10 @@
 <?php
 require '../controller/evenementC.php';
-
+require '../controller/participationC.php';
 $evenementC = new evenementC();
-
-$evenement = $evenementC->afficherevenement(); 
+$participationC = new participationC;
+$evenement = $evenementC->afficherevenement();
+session_start(); 
 ?>
 <html lang="fr">
 <head>
@@ -31,6 +32,8 @@ $evenement = $evenementC->afficherevenement();
     </header>
     <?php 
                 foreach ($evenement as $event) {
+                    $list = $participationC->afficherparticipationbyevent($event['id']);
+                $nbr = count($list);
         ?>
     <section class="main" id="evenement">
 
@@ -39,6 +42,12 @@ $evenement = $evenementC->afficherevenement();
                 <div class="left">
                     <h1><?php echo $event['titre']; ?></h1>
                     <p><?php echo $event['description'];?></p>
+                    <br><?php echo $event['date_ajout'];?></br>
+                    <h5><?php echo $event['auteur'];?></h5>
+                    <br>
+                    <h4>nombre de participants :<?php echo $nbr;?></h4>
+                    <a href="participe.php?idev=<?php echo $event['id'];?>"><button class="primary-btn" >je participe</button></a>
+
                 </div>
                 <div class="right">
                     <img src="uploads/<?php echo $event['img'];?>" alt="">

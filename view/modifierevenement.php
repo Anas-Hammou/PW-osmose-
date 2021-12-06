@@ -5,7 +5,7 @@
     $evenementC = new evenementC();
     
 
-    if (isset($_POST['id'] ) && isset($_POST['titre'] ) && isset($_POST['description']) && isset($_POST['auteur'])&& isset($_POST['fileToUpload'])) 
+    if (isset($_POST['id'] ) && isset($_POST['titre'] ) && isset($_POST['description']) && isset($_POST['auteur'])) 
     {
         $target_dir = "uploads/";
         $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
@@ -434,7 +434,7 @@
                         </label>
                     </td>
                     <td>
-                <input type="file" name="fileToUpload" id="fileToUpload" value="upload/<?php echo $a['img'];?>">   
+                <input type="file" name="fileToUpload" id="fileToUpload" >   
                         </tr>
                 <tr>
                     <td>
@@ -445,7 +445,6 @@
                     </td>
                 </tr>
             </table>
-        </form>
         </form>
          <!-- Footer -->
             <footer class="sticky-footer bg-white">

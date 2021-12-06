@@ -378,15 +378,14 @@
         
                 <!-- End of Topbar -->
 
-<script src="../admin/verif.js"></script>
-<form action="" method="POST">
+<form id="form" action="" method="POST" onsubmit="event.preventDefault(); verif();">
             <table border="1" align="center">
                 <tr>
                     <td>
                         <label for="id">id :
                         </label>
                     </td>
-                    <td><input type="number" name="id" id="number" maxlength="20"></td>
+                    <td><input type="number" name="id" id="id" maxlength="20"></td>
                 </tr>
 				<tr>
                     <td>
@@ -478,5 +477,66 @@
     <script src="js/demo/datatables-demo.js"></script>
 
 </body>
+<script>
+    function allLetter(word) {
+    var letters = /^[A-Za-z]+$/;
+    if (word.match(letters)) {
+        return true;
+    }
+    else {
+        return false;
+        
+    }
+  }
+  function startsWithCapital(word) {
+    if (/[A-Z]/.test(word[0])) {
+        return true;
+    }
+    else {
+        return false;
+        
+    }
+  }
+  function verif() {
+     var idclient =document.getElementById("idclient").value;
+     var idev =document.getElementById("idev").value;
+     var id =document.getElementById("id").value;
 
+  var ok=true;
+ 
+    
+    if (id<0) {
+        alert("id doit etre positive"); 
+        document.getElementById("msgDiv12").innerHTML = "id doit etre positive! ";
+        preventdefault();
+        returnToPreviousPage();
+        return false;
+    }
+    if (idev<0) {
+        alert("id doit etre positive"); 
+        document.getElementById("msgDiv12").innerHTML = "id doit etre positive! ";
+        preventdefault();
+        returnToPreviousPage();
+        return false;
+    }  
+    if (idclient<0) {
+        alert("id doit etre positive"); 
+        document.getElementById("msgDiv12").innerHTML = "id doit etre positive! ";
+        preventdefault();
+        returnToPreviousPage();
+        return false;
+    }     
+  
+
+        document.forms["form"].submit();
+
+        return true;
+       
+
+      
+  
+   
+    
+  }
+</script>
 </html>

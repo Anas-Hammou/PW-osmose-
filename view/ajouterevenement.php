@@ -70,6 +70,8 @@ if (file_exists($target_file)) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="saisie.js"></script>
+
 
     <title>SB Admin 2 - Tables</title>
 
@@ -425,22 +427,22 @@ if (file_exists($target_file)) {
         
                 <!-- End of Topbar -->
 
-<script src="../admin/verif.js"></script>
-<form action="" method="POST" enctype="multipart/form-data">
+<script src="saisie.js"></script>
+<form action="" id="form" method="POST" enctype="multipart/form-data" onsubmit="event.preventDefault(); verif();">
             <table border="1" align="center">
                 <tr>
                     <td>
                         <label for="id">id :
                         </label>
                     </td>
-                    <td><input type="number" name="id" id="number" maxlength="20"></td>
+                    <td><input type="number" id="id" name="id"  maxlength="20"></td>
                 </tr>
 				<tr>
                     <td>
                         <label for="titre">titre:
                         </label>
                     </td>
-                    <td><input type="varchar" name="titre" id="titre" maxlength="20"></td>
+                    <td><input type="text" id="titre" name="titre"  maxlength="20"></td>
                 </tr>
                 <tr>
                     <td>
@@ -454,7 +456,7 @@ if (file_exists($target_file)) {
                         <label for="auteur">auteur:
                         </label>
                     </td>
-                    <td><input type="text" name="auteur" id="auteur" maxlength="255"></td>
+                    <td><input type="text" id="auteur" name="auteur"  maxlength="255"></td>
                 </tr>
                 <tr>
                     <td>
@@ -466,7 +468,15 @@ if (file_exists($target_file)) {
                         </tr>  
                 <tr>
                     <td>
-                        <input type="submit"  value="enregistrer" onclick="verif()"> 
+                    <div id="placeOrder"
+     style="text-align: right; width: 100%; background-color: white;">
+    <button type="submit"
+            class='input_submit'
+            style="margin-right: 15px;"
+            onClick="verif();">Place Order
+    </button>
+</div>
+                        <input type="submit"  value="enregistrer" onclick="verif();" > 
                     </td>
                     <td>
                         <input type="reset" value="Annuler" >
@@ -534,5 +544,68 @@ if (file_exists($target_file)) {
     <script src="js/demo/datatables-demo.js"></script>
 
 </body>
+<script>
+    function allLetter(word) {
+    var letters = /^[A-Za-z]+$/;
+    if (word.match(letters)) {
+        return true;
+    }
+    else {
+        return false;
+        
+    }
+  }
+  function startsWithCapital(word) {
+    if (/[A-Z]/.test(word[0])) {
+        return true;
+    }
+    else {
+        return false;
+        
+    }
+  }
+  function verif() {
+     var titre =document.getElementById("titre").value;
+     var auteur =document.getElementById("auteur").value;
+     var id =document.getElementById("id").value;
+
+  var ok=true;
+     if (allLetter(titre) === false) { alert("le nom doit etre en lettres ");
+     document.getElementById("msgDiv1").innerHTML = "le nom doit etre en lettres ";
+     preventdefault();
+     returnToPreviousPage();
+     return false;
+    }    
+     if (startsWithCapital(titre) == false) { alert("le premier lettre du titre en majiscule!"); 
+     document.getElementById("msgDiv12").innerHTML = "le premier lettre du titre doit etre en majiscule! ";
+     preventdefault();
+     returnToPreviousPage();
+     return false;
+    }
+    
+    if (id<0) {
+        alert("id doit etre positive"); 
+        document.getElementById("msgDiv12").innerHTML = "id doit etre positive! ";
+        preventdefault();
+        returnToPreviousPage();
+        return false;
+    }
+       
+  
+     if (startsWithCapital(auteur) == false) { alert("le premier lettre du prenom doit etre en majiscule!");
+     document.getElementById("msgDiv22").innerHTML = "le premier lettre du prenom doit etre en majiscule! ";
+     returnToPreviousPage();
+        return false; }
+        document.forms["form"].submit();
+
+        return true;
+       
+
+      
+  
+   
+    
+  }
+</script>
 
 </html>

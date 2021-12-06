@@ -1,25 +1,3 @@
-<?php
-
-    require_once     '../controller/participationC.php';
-    require_once '../model/participation.php' ;
-    $participationC = new participationC();
-    
-
-    if (isset($_POST['id'] ) && isset($_POST['idev'] ) && isset($_POST['idclient']) && isset($_POST['email'] )) 
-    {
-       // echo $_POST['id'] ;
-            $participation = new participation($_POST['id'] , $_POST['idev'] ,$_POST['idclient'],$_POST['email']);
-            $participationC->modifierparticipation($participation);
-  //          header('Location: index.php');      
-            header('Location:afficherparticipation.php');
-         //   $a = $participationC->getparticipationbyID($_GET['id']) ;
-    }else
-    {
-        $a = $participationC->getparticipationbyID($_GET['id']) ;
-     
-    }
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,23 +9,22 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables participation</title>
+    <title>SB Admin 2 - Charts</title>
 
-    <!-- Custom fonts for this template -->
+    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
-    <!-- Custom styles for this template -->
+    <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this page -->
-    <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top">
+
+    <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
@@ -65,7 +42,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
@@ -127,29 +104,34 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages participation</span>
+                    <span>Pages</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">page</h6>
-                        <a class="collapse-item" href="participation.html">participation</a>
-                   
+                        <h6 class="collapse-header">Login Screens:</h6>
+                        <a class="collapse-item" href="login.html">Login</a>
+                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Other Pages:</h6>
+                        <a class="collapse-item" href="404.html">404 Page</a>
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+            <li class="nav-item active">
+                <a class="nav-link" href="charts.php">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts participation</span></a>
+                    <span>Charts</span></a>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="afficherparticipation.php">
+                <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables participation</span></a>
+                    <span>Tables</span></a>
             </li>
 
             <!-- Divider -->
@@ -158,13 +140,6 @@
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
             </div>
 
         </ul>
@@ -378,56 +353,53 @@
                     </ul>
 
                 </nav>
-            
-        
                 <!-- End of Topbar -->
 
-<form action="" method="POST">
-            <table border="1" align="center">
-                <tr>
-                    <td>
-                        <label for="id">id participation:
-                        </label>
-                    </td>
-                    <td><input type="number" name="id" id="id" maxlength="20" value="<?php echo $a['id'];?>"  readonly></td>
-                </tr>
-				<tr>
-                    <td>
-                        <label for="idev">idev:
-                        </label>
-                    </td>
-                    <td><input type="number" value="<?php echo $a['idev'];?>" name="idev" id="idev" maxlength="20"></td>
-                </tr>
-                <tr>
-                    <td>
-                        <label for="idclient">idclient:
-                        </label>
-                    </td>
-                    <td><input type="number" value="<?php echo $a['idclient'];?>" name="idclient" id="idclient" maxlength="20"></td>
-                </tr> 
-                
-                <tr>
-                    <td>
-                        <label for="idclient">email:
-                        </label>
-                    </td>
-                    <td><input type="email" value="<?php echo $a['email'];?>" name="email" id="email"></td>
-                </tr> 
-                <tr>
-                    <td>
-                        <input type="submit" value="Modifier"> 
-                    </td>
-                    <td>
-                        <input type="reset" value="Annuler" >
-                    </td>
-                </tr>
-            </table>
-        </form>
-         <!-- Footer -->
-         <footer class="sticky-footer bg-white">
+                <!-- Begin Page Content -->
+                <?php
+  $con = mysqli_connect("localhost","root","","crud");
+  
+?>
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['titre', 'participation'],
+         <?php
+         $sql = "SELECT * FROM article";
+         $fire = mysqli_query($con,$sql);
+          while ($result = mysqli_fetch_assoc($fire)) {
+            echo"['".$result['titre']."',".$result['id']."],";
+          }
+
+         ?>
+        ]);
+        var options = {
+          title: 'statistiques des participations'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  </body>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; AIM</span>
+                        <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
@@ -475,11 +447,12 @@
     <script src="js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <script src="js/demo/chart-area-demo.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="js/demo/chart-bar-demo.js"></script>
 
 </body>
 
