@@ -19,6 +19,19 @@
                  $th->getMessage();
             }
         }
+        function triParnbrearticle()
+        {
+            $requete = "select * from categorie ORDER BY nbrearticle";
+            $config = config::getConnexion();
+            try {
+                $querry = $config->prepare($requete);
+                $querry->execute();
+                $result = $querry->fetchAll();
+                return $result ;
+            } catch (PDOException $th) {
+                 $th->getMessage();
+            }
+        }
         function getcategoriebyID($id)
         {
             $requete = "select * from categorie where idcategorie=:id";
@@ -92,5 +105,37 @@
                  $th->getMessage();
             }
         }
-   
+        function affichercategoriebyarticle($idcategorie)
+        {
+            $requete = "select * from article where idcategorie=$idcategorie";
+            $config = config::getConnexion();
+            try {
+                $querry = $config->prepare($requete);
+                $querry->execute();
+                $result = $querry->fetchAll();
+                return $result ;
+            } catch (PDOException $th) {
+                 $th->getMessage();
+            }
+        }
+  
+     /**
+ * Get sticky posts for home page
+ */
+function getcategorie($idcategorie){
+    $requete="select * from article where idcategorie=:id   ";
+    $config= config::getConnexion();
+    try{
+    $query=$config->prepare($requete);
+    $query->execute(
+[ 
+    'id'=>$idcategorie,
+    
+]);
+    $result=$query->fetchAll();
+    return $result;
+    }catch (PDOException $e)
+    {$e->getMesssage();}
+}   
+        
     }
