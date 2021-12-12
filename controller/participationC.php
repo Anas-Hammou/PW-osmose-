@@ -1,6 +1,6 @@
 <?php
 
-    require_once '../assets/utils/config.php';
+    require_once '../config.php';
     require_once '../model/participation.php';
 
 

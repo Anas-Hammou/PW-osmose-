@@ -1,6 +1,6 @@
 <?php
 
-    require_once '../assets/utils/config.php';
+    require_once '../config.php';
     require_once '../model/evenement.php';
 
 
@@ -20,9 +20,10 @@
             }
         }
 
+
         function trievenement()
         {
-            $requete = "select * from evenement ORDER BY titre";
+            $requete = "select * from evenement ORDER BY nbr_p DESC";
             $config = config::getConnexion();
             try {
                 $querry = $config->prepare($requete);
@@ -102,6 +103,27 @@
                     'description'=>$evenement->getdescription(),
                     'auteur'=>$evenement->getauteur(),
                     'img'=>$evenement->getimg()
+
+                  
+                ]);
+            } catch (PDOException $th) {
+                 $th->getMessage();
+            }
+        }
+
+        function incparticipants($id,$nbr_p)
+        {
+            $config = config::getConnexion();
+            try {
+                $querry = $config->prepare('
+                UPDATE evenement SET
+                nbr_p=:nbr_p
+
+                where id=:id
+                ');
+                $querry->execute([
+                    'id'=>$id,
+                    'nbr_p' => $nbr_p
 
                   
                 ]);
